@@ -1,0 +1,29 @@
+@startuml User Stories
+left to right direction
+
+:Developer: as Developer
+
+rectangle Persist {
+    usecase (Add Data via\nFunction Call) as AddDataViaFunction
+    usecase (Add Data via\nHTTP Call) as AddDataViaHTTP
+    usecase (Create Month\nData) as CreateMonthData
+    usecase (Create Day\nData) as CreateDayData
+}
+
+rectangle Consume {
+    usecase (Retrieve Data) as ReteiveData
+    usecase (Combine Day\nData) as CombineDayData
+    usecase (Combine Month\nData) as CombineMonthData
+}
+
+Developer --> AddDataViaFunction
+Developer --> AddDataViaHTTP
+    AddDataViaFunction .. CreateMonthData
+    AddDataViaHTTP .. CreateMonthData
+    AddDataViaFunction .. CreateDayData
+    AddDataViaHTTP .. CreateDayData
+Developer --> ReteiveData
+    ReteiveData .. CombineDayData
+    ReteiveData .. CombineMonthData
+
+@enduml
